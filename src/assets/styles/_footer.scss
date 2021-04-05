@@ -1,0 +1,41 @@
+footer {
+	background-color: #2d2c2c;
+	color: #fff;
+	padding: 55px 0 10px;
+
+	ul {
+		list-style: none;
+		padding-left: 0;
+	}
+
+	@include media-breakpoint-down(sm) {
+		ul {
+			display: none;
+		}
+
+		.col-sm {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			h5 {
+				border-bottom: 1px solid #fff;
+				width: 40%;
+				text-align: center;
+				padding-bottom: 0.8rem;
+				margin-bottom: 0.8rem;
+			}
+
+			&:last-child {
+				margin-top: 70px;
+				h5 {
+					border: none;
+					letter-spacing: 0.5rem;
+					font-family: 'Lato-Bold';
+				}
+				p {
+					text-align: center;
+				}
+			}
+		}
+	}
+}
