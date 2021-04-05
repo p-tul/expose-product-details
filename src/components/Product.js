@@ -1,27 +1,44 @@
 import React, { useEffect, useState } from 'react'
-import { StaticImage } from 'gatsby-plugin-image'
+import { useStaticQuery, graphql } from 'gatsby'
 
 import ProductImage from './ProductImage'
 
 const Product = ({ end }) => {
+	const data = useStaticQuery(graphql`
+		query productQuery {
+			product {
+				title
+				id
+				variants {
+					color
+					compare_at_price
+					description
+					image
+					price
+					id
+				}
+			}
+		}
+	`)
+
 	const [loading, setLoading] = useState(false)
 	const [count, setCount] = useState(1)
 	const [available, setAvailable] = useState(
 		end - new Date().getTime() <= 0 ? false : true
 	)
-	const [product, setProduct] = useState(null)
+	const [product, setProduct] = useState(data.product)
 	const [variation, setVariation] = useState(0)
 
-	useEffect(function () {
-		const data = fetch(
-			'https://cdn.shopify.com/s/files/1/0333/4474/9700/files/product.json'
-		)
-			.then(res => res.json())
-			.then(data => {
-				console.log(data)
-				setProduct(data)
-			})
-	}, [])
+	// useEffect(function () {
+	// 	const data = fetch(
+	// 		'https://cdn.shopify.com/s/files/1/0333/4474/9700/files/product.json'
+	// 	)
+	// 		.then(res => res.json())
+	// 		.then(data => {
+	// 			console.log(data)
+	// 			setProduct(data)
+	// 		})
+	// }, [])
 
 	const handleVariantClick = e => {
 		setVariation(e.target.getAttribute('index'))
